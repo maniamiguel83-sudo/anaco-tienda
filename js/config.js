@@ -11,6 +11,6 @@
                false = envío normal (sin modo depuración).
    ============================================================ */
 window.TIENDA_CONFIG = {
-  GA_MEASUREMENT_ID: "G-XXXXXXXXXX", // <-- pega aquí tu ID de medición
+  GA_MEASUREMENT_ID: "G-3HBMG7V119", // <-- pega aquí tu ID de medición
   DEBUG_MODE: true                   // <-- true para depurar, false para producción
 };
