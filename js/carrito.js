@@ -19,15 +19,36 @@ var CART=window.CART={
  valor:function(items){return items.reduce(function(s,i){return s+i.price*i.quantity},0)}
 };
 var LOGO='<svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><path d="M7 35 20 5l13 30" fill="none" stroke="#0B2545" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><polyline points="11,27 17,22 22,25 30,12" fill="none" stroke="#008C9E" stroke-width="2.5"/><g fill="#00A86B"><circle cx="11" cy="27" r="2.5"/><circle cx="17" cy="22" r="2.5"/><circle cx="22" cy="25" r="2.5"/><circle cx="30" cy="12" r="2.5"/></g></svg>';
+var obs=null;
+function revelar(){
+ var els=document.querySelectorAll(".reveal");
+ if(!els.length)return;
+ var red=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ if(red||!("IntersectionObserver" in window)){
+  for(var i=0;i<els.length;i++)els[i].classList.add("visible");
+  return}
+ if(!obs){
+  obs=new IntersectionObserver(function(ents){
+   ents.forEach(function(en){
+    if(en.isIntersecting){en.target.classList.add("visible");obs.unobserve(en.target)}
+   })
+  },{threshold:0.08,rootMargin:"0px 0px -16px 0px"});
+ }
+ for(var j=0;j<els.length;j++){
+  if(!els[j].classList.contains("visible"))obs.observe(els[j]);
+ }
+}
 var UI=window.UI={
  fmt:function(n){return new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0}).format(n)},
  esc:function(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})},
  badge:function(){var b=document.getElementById("badge");if(!b)return;var u=CART.unidades();b.textContent=u;if(u>0){b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump")}},
+ revelar:revelar,
  montar:function(){
   var h=document.getElementById("cab"),f=document.getElementById("pie");
-  if(h)h.innerHTML='<a class="marca" href="index.html">'+LOGO+'<span>ANACO</span></a><nav><a href="index.html">Servicios</a><a href="carrito.html">Carrito<span class="badge" id="badge">0</span></a></nav>';
+  if(h)h.innerHTML='<a class="marca" href="index.html">'+LOGO+'<span>ANACO</span></a><nav><a href="index.html#servicios">Servicios</a><a href="index.html#como-funciona">Cómo funciona</a><a href="index.html#por-que">Por qué ANACO</a><a class="nav-cart" href="carrito.html">Carrito<span class="badge" id="badge">0</span></a></nav>';
   if(f)f.innerHTML='<p><b>ANACO S.A.S. · Analítica de Comercio Colombiano</b></p><p>Sitio académico de simulación. Los servicios, precios y la plataforma son propuestas académicas.</p><p>No procesa pagos ni guarda datos personales. Usa Google Analytics 4 para medir la navegación.</p>';
-  UI.badge()}
+  UI.badge();
+  revelar()}
 };
 UI.montar();
 })();
