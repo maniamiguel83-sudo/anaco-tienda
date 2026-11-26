@@ -2,78 +2,116 @@
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ANACO · Servicios de análisis predictivo</title><link rel="stylesheet" href="css/estilos.css"></head>
 <body><header class="cab" id="cab"></header>
 <section class="hero">
+  <div class="hero-bg-map" aria-hidden="true">
+    <svg viewBox="0 0 1200 540" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="nodoGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.8"/>
+          <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <!-- Silueta estilizada de Colombia + red comercial global -->
+      <path d="M510 120 L548 104 L582 132 L614 148 L632 196 L618 248 L592 290 L574 342 L538 358 L512 318 L494 274 L478 228 L490 168 Z" fill="rgba(34,211,238,0.12)" stroke="#22D3EE" stroke-width="1.4"/>
+      <path d="M542 184 Q390 120 240 138" fill="none" stroke="#22D3EE" stroke-width="1.2" stroke-dasharray="5 5"/>
+      <path d="M542 184 Q740 96 930 132" fill="none" stroke="#10B981" stroke-width="1.2" stroke-dasharray="5 5"/>
+      <path d="M542 184 Q760 220 980 264" fill="none" stroke="#22D3EE" stroke-width="1.2" stroke-dasharray="4 6"/>
+      <path d="M542 184 Q340 270 190 318" fill="none" stroke="#10B981" stroke-width="1.2" stroke-dasharray="4 6"/>
+      <circle cx="542" cy="184" r="24" fill="url(#nodoGlow)"/>
+      <circle cx="542" cy="184" r="4.5" fill="#10B981"/>
+      <circle cx="240" cy="138" r="4" fill="#22D3EE"/>
+      <circle cx="930" cy="132" r="4" fill="#10B981"/>
+      <circle cx="980" cy="264" r="3.5" fill="#22D3EE"/>
+      <circle cx="190" cy="318" r="3.5" fill="#10B981"/>
+      <circle cx="516" cy="236" r="3" fill="#22D3EE"/>
+      <circle cx="584" cy="212" r="3" fill="#22D3EE"/>
+    </svg>
+  </div>
   <div class="hero-inner">
     <div class="hero-layout">
       <div class="hero-copy">
-        <div class="hero-kicker"><span class="kicker-dot" aria-hidden="true"></span><span>Inteligencia comercial · Partidas arancelarias y demanda externa</span></div>
-        <h1>Datos reales que anticipan mercados, predicciones que impulsan exportaciones</h1>
-        <p class="hero-sub">Analítica predictiva para equipos exportadores: monitorea demanda por país destino, precios por partida arancelaria y margen de error visible antes de decidir.</p>
+        <div class="hero-kicker"><span class="kicker-dot" aria-hidden="true"></span><span>Inteligencia comercial predictiva · Analítica exterior</span></div>
+        <h1>Datos reales que <span class="hl">anticipan mercados</span>, predicciones que <span class="hl">impulsan exportaciones</span></h1>
+        <p class="hero-sub">Proyecta demanda internacional, precios FOB por partida arancelaria y escenarios por país destino con modelos trazables y margen de error visible.</p>
         <div class="hero-acciones">
-          <a class="btn" href="#servicios">Explorar planes y servicios</a>
+          <a class="btn" href="#servicios">Explorar planes y servicios →</a>
+          <button class="btn btn-cyan" id="btn-demo" type="button">Ver demo ▷</button>
         </div>
       </div>
-      <aside class="hero-mockup" aria-label="Vista previa de tablero predictivo ANACO">
+      <aside class="hero-mockup" id="hero-mockup" aria-label="Dashboard analítico ANACO 360">
+        <div class="mock-top">
+          <div class="mock-tabs" role="tablist" aria-label="Vistas del tablero de ejemplo">
+            <button class="mock-tab activo" type="button" data-tab="demanda" role="tab" aria-selected="true">Demanda</button>
+            <button class="mock-tab" type="button" data-tab="precios" role="tab" aria-selected="false">Precios</button>
+            <button class="mock-tab" type="button" data-tab="paises" role="tab" aria-selected="false">Países</button>
+          </div>
+          <span class="mock-ejemplo">Datos de ejemplo</span>
+        </div>
         <div class="mock-head">
           <div>
-            <span class="mock-badge">Vista previa · ANACO 360</span>
-            <strong class="mock-title">Partida 0901 · Café sin tostar → EE. UU.</strong>
+            <span class="mock-badge" id="mock-badge">ANACO 360 · Proyección de demanda</span>
+            <strong class="mock-title" id="mock-title">Partida 0901 · Café sin tostar → EE. UU.</strong>
           </div>
-          <span class="mock-mape" title="Error porcentual absoluto medio">Error (MAPE): ±3,8 %</span>
+          <span class="mock-mape" id="mock-mape">MAPE ±3,8 %</span>
         </div>
-        <div class="mock-kpis">
-          <div class="mock-kpi"><span>Demanda proyectada (6 m)</span><b>+14,2 %</b></div>
-          <div class="mock-kpi"><span>Precio FOB estimado</span><b>USD 4,86/kg</b></div>
+        <div class="mock-kpis" id="mock-kpis">
+          <div class="mock-kpi"><span>Crecimiento pronosticado</span><b>+14,2 %</b></div>
+          <div class="mock-kpi"><span>Precio estimado</span><b>USD 4,86/kg</b></div>
           <div class="mock-kpi"><span>Confianza del modelo</span><b>96,2 %</b></div>
         </div>
-        <div class="mock-chart">
-          <svg viewBox="0 0 320 112" width="100%" height="112" role="img" aria-label="Pronóstico de demanda con banda de error">
+        <div class="mock-chart" id="mock-chart">
+          <svg viewBox="0 0 320 112" width="100%" height="112" role="img" aria-label="Proyección ascendente con banda de error">
             <defs>
               <linearGradient id="bandaErr" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#008C9E" stop-opacity="0.22"/>
-                <stop offset="100%" stop-color="#008C9E" stop-opacity="0.04"/>
+                <stop offset="0%" stop-color="#10B981" stop-opacity="0.34"/>
+                <stop offset="100%" stop-color="#22D3EE" stop-opacity="0.06"/>
               </linearGradient>
             </defs>
-            <line x1="16" y1="24" x2="304" y2="24" stroke="#DCE4EE" stroke-dasharray="3 3"/>
-            <line x1="16" y1="56" x2="304" y2="56" stroke="#DCE4EE" stroke-dasharray="3 3"/>
-            <line x1="16" y1="88" x2="304" y2="88" stroke="#DCE4EE" stroke-dasharray="3 3"/>
-            <polygon points="154,60 202,44 252,32 302,16 302,42 252,54 202,64 154,70" fill="url(#bandaErr)"/>
-            <polyline points="18,86 64,78 108,72 154,65" fill="none" stroke="#0B2545" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <polyline points="154,65 202,54 252,43 302,29" fill="none" stroke="#007A4D" stroke-width="2.5" stroke-dasharray="5 4" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="154" cy="65" r="3.5" fill="#0B2545"/>
-            <circle cx="202" cy="54" r="3.5" fill="#007A4D"/>
-            <circle cx="252" cy="43" r="3.5" fill="#007A4D"/>
-            <circle cx="302" cy="29" r="4" fill="#007A4D"/>
+            <line x1="16" y1="24" x2="304" y2="24" stroke="rgba(148,163,184,0.22)" stroke-dasharray="3 3"/>
+            <line x1="16" y1="56" x2="304" y2="56" stroke="rgba(148,163,184,0.22)" stroke-dasharray="3 3"/>
+            <line x1="16" y1="88" x2="304" y2="88" stroke="rgba(148,163,184,0.22)" stroke-dasharray="3 3"/>
+            <polygon points="154,60 202,44 252,30 302,14 302,42 252,54 202,64 154,70" fill="url(#bandaErr)"/>
+            <polyline points="18,86 64,78 108,72 154,65" fill="none" stroke="#22D3EE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="154,65 202,54 252,42 302,28" fill="none" stroke="#10B981" stroke-width="2.5" stroke-dasharray="5 4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="154" cy="65" r="3.5" fill="#22D3EE"/>
+            <circle cx="202" cy="54" r="3.5" fill="#10B981"/>
+            <circle cx="252" cy="42" r="3.5" fill="#10B981"/>
+            <circle cx="302" cy="28" r="4" fill="#34D399"/>
           </svg>
           <div class="mock-legend">
             <span><i class="lg-hist"></i> Histórico real</span>
-            <span><i class="lg-pred"></i> Pronóstico a 6 meses</span>
-            <span><i class="lg-band"></i> Banda de error ±3,8 %</span>
+            <span><i class="lg-pred"></i> Proyección 6 meses</span>
+            <span><i class="lg-band"></i> Cono de error</span>
           </div>
         </div>
       </aside>
     </div>
-    <div class="confianza" aria-label="Indicadores de confianza">
-      <div class="conf-item">
-        <span class="conf-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg></span>
-        <div><b>100 % remoto</b><span>Activación y sesiones virtuales desde cualquier ciudad</span></div>
+    <div class="hero-fuentes" aria-label="Fuentes de datos y respaldo técnico">
+      <div class="fuentes-logos">
+        <span class="fuentes-lbl">Fuentes de datos</span>
+        <span class="fuente-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 10h10M7 14h6"/></svg>DIAN</span>
+        <span class="fuente-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20v-4"/></svg>DANE</span>
+        <span class="fuente-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/></svg>TradeMap</span>
+        <span class="fuente-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 21 7 21 17 12 22 3 17 3 7"/></svg>UN Comtrade</span>
       </div>
-      <div class="conf-item">
-        <span class="conf-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span>
-        <div><b>Entrega en días hábiles</b><span>Despliegue SaaS desde 48 h y proyectos con cronograma</span></div>
-      </div>
-      <div class="conf-item">
-        <span class="conf-ico" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="16 7 21 7 21 12"/></svg></span>
-        <div><b>Pronóstico con error visible</b><span>Reportamos MAPE e intervalos de confianza en cada serie</span></div>
+      <div class="fuentes-metricas">
+        <div class="fm-item"><b>+5.000 partidas</b><span>Cobertura arancelaria</span></div>
+        <div class="fm-item"><b>120 países</b><span>Mercados monitoreados</span></div>
+        <div class="fm-item"><b>MAPE ±3,8 %</b><span>Error histórico visible</span></div>
       </div>
     </div>
   </div>
 </section>
 <main class="wrap" id="servicios">
-  <div id="banner"></div>
   <div class="sec-head reveal">
     <span class="sec-tag">Catálogo ANACO</span>
-    <h2>Planes SaaS mensuales y servicios por proyecto</h2>
-    <p>Separa el acceso continuo a la plataforma ANACO 360 de los proyectos puntuales de datos o estudios a la medida.</p>
+    <h2>Suscripciones SaaS y servicios por proyecto</h2>
+    <p>Elige entre acceso mensual a la plataforma ANACO 360 o intervenciones puntuales de datos y estudios especializados.</p>
+  </div>
+  <div id="banner"></div>
+  <div class="cat-tabs" role="tablist" aria-label="Filtrar catálogo por modalidad">
+    <button class="cat-tab activo" type="button" data-filtro="todos" role="tab" aria-selected="true">Todos (5)</button>
+    <button class="cat-tab" type="button" data-filtro="saas" role="tab" aria-selected="false">Suscripciones SaaS · Mensual (3)</button>
+    <button class="cat-tab" type="button" data-filtro="proy" role="tab" aria-selected="false">Servicios por Proyecto (2)</button>
   </div>
   <div class="grid" id="grid"></div>
 </main>
@@ -81,71 +119,71 @@
   <div class="sec-head reveal">
     <span class="sec-tag">Metodología</span>
     <h2>Cómo funciona</h2>
-    <p>Cada etapa produce un entregable verificable para pasar de datos dispersos a decisiones comerciales.</p>
+    <p>Cuatro etapas conectadas que convierten registros aduaneros y ventas en proyecciones verificables.</p>
   </div>
   <div class="como-grid">
     <article class="paso-card reveal">
       <div class="paso-top">
         <span class="paso-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg></span>
-        <span class="paso-num-tag">Paso 1 · Datos</span>
+        <span class="paso-num-tag">48 h · Paso 1</span>
       </div>
       <h3>1. Datos</h3>
-      <p>Consolidamos tu historial de facturación externa y registros aduaneros por partida arancelaria.</p>
-      <div class="paso-entregable"><b>Entregable:</b> Inventario de fuentes y serie histórica estandarizada</div>
+      <p>Integramos tu historial comercial, partidas arancelarias (HS) y fuentes oficiales de comercio exterior.</p>
+      <div class="paso-entregable"><b>Entregable:</b> Diccionario de fuentes y serie limpia</div>
     </article>
     <article class="paso-card reveal">
       <div class="paso-top">
         <span class="paso-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 15l4-4 3 3 4-5"/></svg></span>
-        <span class="paso-num-tag">Paso 2 · Modelo</span>
+        <span class="paso-num-tag">6 meses · Paso 2</span>
       </div>
       <h3>2. Modelo</h3>
-      <p>Modelamos estacionalidad, demanda y precios FOB por mercado objetivo con horizonte a 6 meses.</p>
-      <div class="paso-entregable"><b>Dato clave:</b> Proyección por país destino con banda de confianza</div>
+      <p>Entrenamos series de demanda y precios FOB por destino incorporando estacionalidad y tendencia.</p>
+      <div class="paso-entregable"><b>Entregable:</b> Pronóstico con banda de confianza</div>
     </article>
     <article class="paso-card reveal">
       <div class="paso-top">
         <span class="paso-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></span>
-        <span class="paso-num-tag">Paso 3 · Revisión</span>
+        <span class="paso-num-tag">MAPE · Paso 3</span>
       </div>
       <h3>3. Revisión</h3>
-      <p>Auditamos el desempeño histórico del modelo junto a tu equipo comercial antes de publicar.</p>
-      <div class="paso-entregable"><b>Métrica visible:</b> Error histórico (MAPE) y supuestos documentados</div>
+      <p>Auditamos el error histórico del modelo junto a tu equipo antes de habilitar cada tablero o informe.</p>
+      <div class="paso-entregable"><b>Entregable:</b> Bitácora de validación y error visible</div>
     </article>
     <article class="paso-card reveal">
       <div class="paso-top">
         <span class="paso-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span>
-        <span class="paso-num-tag">Paso 4 · Informe</span>
+        <span class="paso-num-tag">Activo · Paso 4</span>
       </div>
       <h3>4. Informe</h3>
-      <p>Publicamos tableros en ANACO 360 y entregamos resúmenes ejecutivos para comités comerciales.</p>
-      <div class="paso-entregable"><b>Entregable:</b> Tablero activo + informe ejecutivo descargable</div>
+      <p>Publicamos tu tablero en ANACO 360 y entregamos resúmenes ejecutivos listos para comités.</p>
+      <div class="paso-entregable"><b>Entregable:</b> Tablero interactivo + informe ejecutivo</div>
     </article>
   </div>
 </section>
 <section class="wrap sec-bloque" id="por-que">
   <div class="sec-head reveal">
     <span class="sec-tag">Diferenciales</span>
-    <h2>Por qué ANACO</h2>
-    <p>Rigor estadístico y trazabilidad comercial pensados para decisiones reales de exportación.</p>
+    <h2>¿Por qué ANACO?</h2>
+    <p>Rigor estadístico y trazabilidad comercial diseñados para decisiones reales de exportación.</p>
   </div>
   <div class="por-grid">
     <article class="por-card reveal">
       <div class="por-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg></div>
       <h3>Transparencia</h3>
-      <p>Precios públicos en COP, plazos por días hábiles y alcance definido sin costos ocultos.</p>
-      <div class="por-dato"><b>En concreto:</b> Cupón ANUAL8 del 8 % visible antes de pagar y sin cláusulas de permanencia.</div>
+      <p>Precios publicados en COP, plazos definidos en días hábiles y alcance cerrado desde el inicio.</p>
+      <div class="por-dato"><b>Respaldo:</b> Descuento fijo ANUAL8 (8 %) visible antes de confirmar tu pedido.</div>
     </article>
     <article class="por-card reveal">
       <div class="por-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
       <h3>Acompañamiento</h3>
-      <p>Sesiones guiadas de lectura de resultados para que tu equipo actúe sobre cada señal del mercado.</p>
-      <div class="por-dato"><b>En concreto:</b> Soporte por correo en Esencial y analista dedicado en Empresarial y Estudios.</div>
+      <p>Sesiones guiadas de lectura de resultados para que el equipo comercial actúe con claridad.</p>
+      <div class="por-dato"><b>Respaldo:</b> Soporte directo por correo y analista dedicado en Empresarial y Estudios.</div>
     </article>
     <article class="por-card reveal">
       <div class="por-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
       <h3>Datos verificables</h3>
-      <p>Trazabilidad completa de fuentes y métricas de error explícitas en cada tablero y estudio.</p>
-      <div class="por-dato"><b>En concreto:</b> Cruce DIAN / DANE / TradeMap con error MAPE reportado (ej. ±3,8 % a 6 meses).</div>
+      <p>Trazabilidad completa de fuentes aduaneras y error porcentual explícito en cada pronóstico.</p>
+      <div class="por-dato"><b>Respaldo:</b> Cruce DIAN, DANE, TradeMap y UN Comtrade con MAPE auditado (±3,8 %).</div>
     </article>
   </div>
 </section>

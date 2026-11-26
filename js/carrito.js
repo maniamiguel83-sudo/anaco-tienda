@@ -18,7 +18,7 @@ var CART=window.CART={
  items:function(){var c=leer(),i=0;return Object.keys(c.items).map(function(id){var p=window.buscarProducto(id);return p?CART.item(p,c.items[id],i++,!!c.cupon):null}).filter(Boolean)},
  valor:function(items){return items.reduce(function(s,i){return s+i.price*i.quantity},0)}
 };
-var LOGO='<svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><path d="M7 35 20 5l13 30" fill="none" stroke="#0B2545" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><polyline points="11,27 17,22 22,25 30,12" fill="none" stroke="#008C9E" stroke-width="2.5"/><g fill="#00A86B"><circle cx="11" cy="27" r="2.5"/><circle cx="17" cy="22" r="2.5"/><circle cx="22" cy="25" r="2.5"/><circle cx="30" cy="12" r="2.5"/></g></svg>';
+var LOGO='<svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><path d="M7 35 20 5l13 30" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><polyline points="11,27 17,22 22,25 30,12" fill="none" stroke="#22D3EE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><g fill="#10B981"><circle cx="11" cy="27" r="2.5"/><circle cx="17" cy="22" r="2.5"/><circle cx="22" cy="25" r="2.5"/><circle cx="30" cy="12" r="2.5"/></g></svg>';
 var obs=null;
 function revelar(){
  var els=document.querySelectorAll(".reveal");
@@ -45,7 +45,7 @@ var UI=window.UI={
  revelar:revelar,
  montar:function(){
   var h=document.getElementById("cab"),f=document.getElementById("pie");
-  if(h)h.innerHTML='<a class="marca" href="index.html">'+LOGO+'<span>ANACO</span></a><nav><a href="index.html#servicios">Servicios</a><a href="index.html#como-funciona">Cómo funciona</a><a href="index.html#por-que">Por qué ANACO</a><a class="nav-cart" href="carrito.html">Carrito<span class="badge" id="badge">0</span></a></nav>';
+  if(h)h.innerHTML='<a class="marca" href="index.html">'+LOGO+'<span>ANACO</span></a><nav><a href="index.html#servicios">Servicios</a><a href="index.html#como-funciona">Cómo funciona</a><a href="index.html#por-que">¿Por qué ANACO?</a><a class="nav-cart" href="carrito.html">Carrito<span class="badge" id="badge">0</span></a></nav>';
   if(f)f.innerHTML='<p><b>ANACO S.A.S. · Analítica de Comercio Colombiano</b></p><p>Sitio académico de simulación. Los servicios, precios y la plataforma son propuestas académicas.</p><p>No procesa pagos ni guarda datos personales. Usa Google Analytics 4 para medir la navegación.</p>';
   UI.badge();
   revelar()}
